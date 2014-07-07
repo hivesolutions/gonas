@@ -6,9 +6,9 @@ import "net"
 import "sync"
 
 func echo(conn net.Conn, wg sync.WaitGroup) {
-	// defers both the closing of the connection
-	// and the marking of the wait group as done
-	// (unblocks the other side of the channel)
+    // defers both the closing of the connection
+    // and the marking of the wait group as done
+    // (unblocks the other side of the channel)
     defer conn.Close()
     defer wg.Done()
 
@@ -44,6 +44,8 @@ func Serve() error {
     fmt.Print("Starting gonas main loop")
 
     var wg sync.WaitGroup
+    
+    print("asdasd")
 
     ln, err := net.Listen("tcp", "0.0.0.0")
     if err != nil {
