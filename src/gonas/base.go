@@ -38,6 +38,13 @@ func echo(conn net.Conn) {
     }
 }
 
+func http_hello(conn net.Conn) {
+    defer conn.Close()
+    msg := make([]byte, 4096)
+    conn.Read(msg)
+    conn.Write([]byte("HTTP/1.1 200 OK\r\nServer: gonas\r\n\r\nHello World"))
+}
+
 func Serve() error {
     fmt.Print("Starting gonas main loop\n")
 
@@ -55,7 +62,8 @@ func Serve() error {
         if err != nil {
             return err
         }
-        go echo(conn)
+        fmt.Print("Accepted connection\n")
+        go http_hello(conn)
     }
 
     return nil
