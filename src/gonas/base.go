@@ -9,9 +9,9 @@ func echo(conn net.Conn, wg sync.WaitGroup) {
     defer conn.Close()
     defer wg.Done()
 
-       // allocates space fot the buffer that will
-       // hold the data comming from the connection
-      msg := make([]byte, 4096)
+    // allocates space fot the buffer that will
+    // hold the data comming from the connection
+    msg := make([]byte, 4096)
 
     for {
         // reads some data from the connection until the
