@@ -6,6 +6,9 @@ import "net"
 import "sync"
 
 func echo(conn net.Conn, wg sync.WaitGroup) {
+	// defers both the closing of the connection
+	// and the marking of the wait group as done
+	// (unblocks the other side of the channel)
     defer conn.Close()
     defer wg.Done()
 
