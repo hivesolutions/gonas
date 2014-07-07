@@ -3,14 +3,12 @@ package gonas
 import "io"
 import "fmt"
 import "net"
-import "sync"
 
-func echo(conn net.Conn, wg sync.WaitGroup) {
-    // defers both the closing of the connection
-    // and the marking of the wait group as done
-    // (unblocks the other side of the channel)
+func echo(conn net.Conn) {
+    // defers the closing of the current connection
+    // to the end of this handling function, so that
+    // no connection are left pending in the "wild"
     defer conn.Close()
-    defer wg.Done()
 
     // allocates space fot the buffer that will
     // hold the data comming from the connection
@@ -41,28 +39,24 @@ func echo(conn net.Conn, wg sync.WaitGroup) {
 }
 
 func Serve() error {
-    fmt.Print("Starting gonas main loop")
+    fmt.Print("Starting gonas main loop\n")
 
-    var wg sync.WaitGroup
-    
-    print("asdasd")
-
-    ln, err := net.Listen("tcp", "0.0.0.0")
+    ln, err := net.Listen("tcp", "0.0.0.0:8080")
     if err != nil {
         return err
     }
 
     defer ln.Close()
 
-    conn, err := ln.Accept()
-    if err != nil {
-        return err
+    fmt.Print("Accepting new connections ...\n")
+
+    for {
+        conn, err := ln.Accept()
+        if err != nil {
+            return err
+        }
+        go echo(conn)
     }
-
-    wg.Add(1)
-    go echo(conn, wg)
-
-    wg.Wait()
 
     return nil
 }
