@@ -4,6 +4,10 @@ import "io"
 import "fmt"
 import "net"
 
+type Server interface {
+	handle(conn net.Conn)
+}
+
 func echo(conn net.Conn) {
     // defers the closing of the current connection
     // to the end of this handling function, so that
@@ -38,14 +42,7 @@ func echo(conn net.Conn) {
     }
 }
 
-func http_hello(conn net.Conn) {
-    defer conn.Close()
-    msg := make([]byte, 4096)
-    conn.Read(msg)
-    conn.Write([]byte("HTTP/1.1 200 OK\r\nServer: gonas\r\n\r\nHello World"))
-}
-
-func Serve() error {
+func Serve(srv Server) error {
     fmt.Print("Starting gonas main loop\n")
 
     ln, err := net.Listen("tcp", "0.0.0.0:8080")
@@ -63,7 +60,7 @@ func Serve() error {
             return err
         }
         fmt.Print("Accepted connection\n")
-        go http_hello(conn)
+        srv.handle(conn)
     }
 
     return nil
