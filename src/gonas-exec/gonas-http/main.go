@@ -7,6 +7,6 @@ func main() {
     srv := gonas.HTTPServer{}
     err := gonas.Serve(&srv)
     if err != nil {
-        fmt.Print(err)
+        fmt.Println(err)
     }
 }

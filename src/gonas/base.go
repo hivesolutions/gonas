@@ -37,12 +37,12 @@ func (srv *AbstractServer) Cleanup(conn net.Conn) error {
     if err != nil {
         return err
     }
-    fmt.Print("Connection closed")
+    fmt.Println("Connection closed")
     return nil
 }
 
 func Serve(srv Server) error {
-    fmt.Print("Starting gonas main loop\n")
+    fmt.Println("Starting gonas main loop")
 
     ln, err := net.Listen("tcp", "0.0.0.0:8080")
     if err != nil {
