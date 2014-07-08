@@ -4,7 +4,7 @@ import "fmt"
 import "gonas"
 
 func main() {
-	srv := gonas.HTTPHello{}
+    srv := gonas.HTTPHello{}
     err := gonas.Serve(&srv)
     if err != nil {
         fmt.Print(err)

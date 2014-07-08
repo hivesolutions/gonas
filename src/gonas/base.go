@@ -5,8 +5,8 @@ import "fmt"
 import "net"
 
 type Server interface {
-	count() int
-	handle(conn net.Conn) error
+    count() int
+    handle(conn net.Conn) error
 }
 
 func echo(conn net.Conn) {
