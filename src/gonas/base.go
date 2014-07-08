@@ -5,6 +5,7 @@ import "fmt"
 import "net"
 
 type Server interface {
+	count() int
 	handle(conn net.Conn) error
 }
 
@@ -59,7 +60,7 @@ func Serve(srv Server) error {
         if err != nil {
             return err
         }
-        fmt.Print("Accepted connection\n")
+        fmt.Printf("Accepted new connection %d\n", srv.count())
         srv.handle(conn)
     }
 

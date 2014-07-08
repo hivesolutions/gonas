@@ -3,9 +3,15 @@ package gonas
 import "net"
 
 type HTTPHello struct {
+	counter int
+}
+
+func (srv HTTPHello) count() int {
+	return srv.counter
 }
 
 func (srv HTTPHello) handle(conn net.Conn) error {
+	srv.counter++
     defer conn.Close()
     msg := make([]byte, 4096)
     conn.Read(msg)
