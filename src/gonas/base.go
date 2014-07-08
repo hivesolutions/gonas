@@ -7,16 +7,16 @@ type Server interface {
     // Retrieves the name as a string that represents
     // the server for the structure, this should be able
     // to address the comprehension of an end user.
-    name() string
+    Name() string
 
     // Returns the number of connection that have been
     // already handled by the current server.
-    count() int
+    Count() int
 
     // Handles a connection by the current server, this should
     // be called as a goroutine for parallel processing, proper
     // thread locking mechanisms should be used.
-    handle(conn net.Conn) error
+    Handle(conn net.Conn) error
 }
 
 func Serve(srv Server) error {
@@ -29,15 +29,15 @@ func Serve(srv Server) error {
 
     defer ln.Close()
 
-    fmt.Printf("Accepting (%s) connections ...\n", srv.name())
+    fmt.Printf("Accepting (%s) connections ...\n", srv.Name())
 
     for {
         conn, err := ln.Accept()
         if err != nil {
             return err
         }
-        fmt.Printf("Accepted new connection %d\n", srv.count())
-        srv.handle(conn)
+        fmt.Printf("Accepted new connection %d\n", srv.Count())
+        srv.Handle(conn)
     }
 
     return nil
