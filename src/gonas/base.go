@@ -27,6 +27,11 @@ func (srv *AbstractServer) Count() int {
     return srv.counter
 }
 
+func (srv *AbstractServer) Handle(conn net.Conn) error {
+    srv.counter++
+    return nil
+}
+
 func Serve(srv Server) error {
     fmt.Print("Starting gonas main loop\n")
 
