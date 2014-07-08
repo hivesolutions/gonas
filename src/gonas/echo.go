@@ -22,12 +22,16 @@ func (srv *EchoServer) Handle(conn net.Conn) error {
 
     for {
         // reads some data from the connection until the
-        // eon of file (eof) indicator is found
+        // and end of stream is found, in case there's an
+        // error the function returns immeidately
         count, err := conn.Read(msg)
         if err != nil {
             return err
         }
 
+		// writes the received data back to the client as
+		// an echo response based and then in case there's
+		// an error returns it to the caller function
         count, err = conn.Write(msg[:count])
         if err != nil {
             return err
