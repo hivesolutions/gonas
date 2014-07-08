@@ -5,7 +5,7 @@ import "fmt"
 import "net"
 
 type Server interface {
-	handle(conn net.Conn)
+	handle(conn net.Conn) error
 }
 
 func echo(conn net.Conn) {
