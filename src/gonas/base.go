@@ -57,7 +57,7 @@ func (srv *AbstractServer) Init() error {
 
 func Serve(srv Server) error {
     srv.Init()
-    srv.Infof("Starting gonas %s main loop\n", srv.Name())
+    srv.Infof("Starting gonas %s main loop ...\n", srv.Name())
 
     ln, err := net.Listen("tcp", "0.0.0.0:8080")
     if err != nil {
