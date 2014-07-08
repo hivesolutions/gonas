@@ -37,7 +37,7 @@ func (srv *AbstractServer) Cleanup(conn net.Conn) error {
     if err != nil {
         return err
     }
-    //fmt.Println("Connection closed")
+    fmt.Println("Connection closed")
     return nil
 }
 
@@ -58,7 +58,7 @@ func Serve(srv Server) error {
         if err != nil {
             return err
         }
-        //fmt.Printf("Accepted new connection %d\n", srv.Count())
+        fmt.Printf("Accepted new connection %d\n", srv.Count())
         srv.Handle(conn)
     }
 
