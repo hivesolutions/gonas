@@ -4,8 +4,18 @@ import "fmt"
 import "net"
 
 type Server interface {
-	name() string
+    // Retrieves the name as a string that represents
+    // the server for the structure, this should be able
+    // to address the comprehension of an end user.
+    name() string
+
+    // Returns the number of connection that have been
+    // already handled by the current server.
     count() int
+
+    // Handles a connection by the current server, this should
+    // be called as a goroutine for parallel processing, proper
+    // thread locking mechanisms should be used.
     handle(conn net.Conn) error
 }
 
