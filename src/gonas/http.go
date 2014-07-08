@@ -3,15 +3,11 @@ package gonas
 import "net"
 
 type HTTPServer struct {
-    counter int
+    AbstractServer
 }
 
 func (srv *HTTPServer) Name() string {
     return "HTTP"
-}
-
-func (srv *HTTPServer) Count() int {
-    return srv.counter
 }
 
 func (srv *HTTPServer) Handle(conn net.Conn) error {

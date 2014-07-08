@@ -3,15 +3,11 @@ package gonas
 import "net"
 
 type EchoServer struct {
-    counter int
+    AbstractServer
 }
 
 func (srv *EchoServer) Name() string {
     return "Echo"
-}
-
-func (srv *EchoServer) Count() int {
-    return srv.counter
 }
 
 func (srv *EchoServer) Handle(conn net.Conn) error {

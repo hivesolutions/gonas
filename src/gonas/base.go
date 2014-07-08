@@ -19,6 +19,14 @@ type Server interface {
     Handle(conn net.Conn) error
 }
 
+type AbstractServer struct {
+    counter int
+}
+
+func (srv *AbstractServer) Count() int {
+    return srv.counter
+}
+
 func Serve(srv Server) error {
     fmt.Print("Starting gonas main loop\n")
 
