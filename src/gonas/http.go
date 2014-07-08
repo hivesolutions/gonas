@@ -18,9 +18,10 @@ func (srv *HTTPServer) Handle(conn net.Conn) error {
         return err
     }
 
-    // registers for the closing of the connection by the end
-    // of the function execution (as expected by definition)
-    defer conn.Close()
+    // defers the cleanup operation for the current connection
+    // that is being handled, these will run the various tasks
+    // associated with the cleaning of the connection/handling
+    defer srv.AbstractServer.Cleanup(conn)
 
     // allocates the proper space for the buffer usage, this is
     // going to be used allong the function for storage

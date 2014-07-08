@@ -18,10 +18,10 @@ func (srv *EchoServer) Handle(conn net.Conn) error {
         return err
     }
 
-    // defers the closing of the current connection
-    // to the end of this handling function, so that
-    // no connection are left pending in the "wild"
-    defer conn.Close()
+    // defers the cleanup operation for the current connection
+    // that is being handled, these will run the various tasks
+    // associated with the cleaning of the connection/handling
+    defer srv.AbstractServer.Cleanup(conn)
 
     // allocates space for the buffer that will
     // hold the data comming from the connection

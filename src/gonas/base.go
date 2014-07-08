@@ -32,6 +32,15 @@ func (srv *AbstractServer) Handle(conn net.Conn) error {
     return nil
 }
 
+func (srv *AbstractServer) Cleanup(conn net.Conn) error {
+    err := conn.Close()
+    if err != nil {
+        return err
+    }
+    fmt.Print("Connection closed")
+    return nil
+}
+
 func Serve(srv Server) error {
     fmt.Print("Starting gonas main loop\n")
 
