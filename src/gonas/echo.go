@@ -6,15 +6,15 @@ type EchoServer struct {
     counter int
 }
 
-func (srv *EchoServer) name() string {
+func (srv *EchoServer) Name() string {
     return "Echo"
 }
 
-func (srv *EchoServer) count() int {
+func (srv *EchoServer) Count() int {
     return srv.counter
 }
 
-func (srv *EchoServer) handle(conn net.Conn) error {
+func (srv *EchoServer) Handle(conn net.Conn) error {
     // defers the closing of the current connection
     // to the end of this handling function, so that
     // no connection are left pending in the "wild"

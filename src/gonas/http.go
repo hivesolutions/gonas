@@ -6,15 +6,15 @@ type HTTPServer struct {
     counter int
 }
 
-func (srv *HTTPServer) name() string {
+func (srv *HTTPServer) Name() string {
     return "HTTP"
 }
 
-func (srv *HTTPServer) count() int {
+func (srv *HTTPServer) Count() int {
     return srv.counter
 }
 
-func (srv *HTTPServer) handle(conn net.Conn) error {
+func (srv *HTTPServer) Handle(conn net.Conn) error {
     srv.counter++
     defer conn.Close()
     msg := make([]byte, 4096)

@@ -4,9 +4,9 @@ import "fmt"
 import "net"
 
 type Server interface {
-	name() string
-    count() int
-    handle(conn net.Conn) error
+	Name() string
+    Count() int
+    Handle(conn net.Conn) error
 }
 
 func Serve(srv Server) error {
@@ -19,15 +19,15 @@ func Serve(srv Server) error {
 
     defer ln.Close()
 
-    fmt.Printf("Accepting (%s) connections ...\n", srv.name())
+    fmt.Printf("Accepting (%s) connections ...\n", srv.Name())
 
     for {
         conn, err := ln.Accept()
         if err != nil {
             return err
         }
-        fmt.Printf("Accepted new connection %d\n", srv.count())
-        srv.handle(conn)
+        fmt.Printf("Accepted new connection %d\n", srv.Count())
+        srv.Handle(conn)
     }
 
     return nil
