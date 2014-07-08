@@ -2,15 +2,19 @@ package gonas
 
 import "net"
 
-type HTTPHello struct {
+type HTTPServer struct {
     counter int
 }
 
-func (srv HTTPHello) count() int {
+func (srv *HTTPServer) name() string {
+    return "HTTP"
+}
+
+func (srv *HTTPServer) count() int {
     return srv.counter
 }
 
-func (srv HTTPHello) handle(conn net.Conn) error {
+func (srv *HTTPServer) handle(conn net.Conn) error {
     srv.counter++
     defer conn.Close()
     msg := make([]byte, 4096)
