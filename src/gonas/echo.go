@@ -2,7 +2,7 @@ package gonas
 
 import "net"
 
-// EchoServer simple servers that returns the string that
+// EchoServer is a simple server that returns the string that
 // has been received to the client side (concept).
 type EchoServer struct {
     AbstractServer
