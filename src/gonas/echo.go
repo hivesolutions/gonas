@@ -2,14 +2,20 @@ package gonas
 
 import "net"
 
+// EchoServer simple servers that returns the string that
+// has been received to the client side (concept)
 type EchoServer struct {
     AbstractServer
 }
 
+// Name returns the name of the server, should be as
+// simple as possible to avoid any confusions 
 func (srv *EchoServer) Name() string {
     return "Echo"
 }
 
+// Handle handles a new connection created from the server
+// and properly sends a response to the client
 func (srv *EchoServer) Handle(conn net.Conn) error {
     // calls the abstract handle operation that is going
     // to start the structures properly and check for error
