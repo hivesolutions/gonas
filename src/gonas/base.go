@@ -6,7 +6,7 @@ import "net"
 import "io/ioutil"
 
 // Server Interface that defines a proper server implementation
-// note that simplicity is one of the major concerns
+// note that simplicity is one of the major concerns.
 type Server interface {
     Logger
 
